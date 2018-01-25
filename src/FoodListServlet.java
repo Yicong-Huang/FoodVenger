@@ -5,12 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 @WebServlet(name = "FoodListServlet",
         urlPatterns = {"/FoodList"})
-
 
 public class FoodListServlet extends HttpServlet {
 
@@ -74,7 +76,7 @@ public class FoodListServlet extends HttpServlet {
 
             }
 
-            out.println("</TABLE>");
+            out.println("</table>");
             resultSet.close();
 
 
@@ -82,12 +84,8 @@ public class FoodListServlet extends HttpServlet {
             dbcon.close();
 
 
-        } catch (SQLException e) {
-            while (e != null) {
-                e = e.getNextException();
-            }
         } catch (java.lang.Exception e) {
-            out.println("<HTML>" + "<HEAD><TITLE>" + "WEB ERROR" + "</TITLE></HEAD>\n</BODY></HTML>");
+            out.println("<html><head><title>WEB ERROR</title></head></body></html>");
             return;
         }
         out.println("</body>");
