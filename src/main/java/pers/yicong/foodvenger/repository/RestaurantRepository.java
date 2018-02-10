@@ -11,9 +11,7 @@ import java.util.List;
 
 @Repository("restaurantRepository")
 public interface RestaurantRepository extends JpaRepository<Restaurant, String>, PagingAndSortingRepository<Restaurant, String> {
-    List<Restaurant> findAllByAddrContains(String address);
-
-    List<Restaurant> findAllByNameContains(String name);
+    List<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);
 
 
 }

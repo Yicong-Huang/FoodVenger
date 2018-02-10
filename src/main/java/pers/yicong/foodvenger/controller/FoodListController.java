@@ -17,6 +17,10 @@ public class FoodListController {
     private ListService listService;
 
 
+    @RequestMapping("/search")
+    ModelAndView search() {
+        return new ModelAndView("search");
+    }
 
     @RequestMapping("/list")
     ModelAndView list(Pageable pageable, @RequestParam String pattern) {
@@ -25,9 +29,23 @@ public class FoodListController {
         modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
         modelAndView.addObject("pattern", pattern);
 
+
         modelAndView.setViewName("list");
 
         return modelAndView;
     }
+
+    @RequestMapping("/search/cuisine/")
+    ModelAndView search(@RequestParam String cuisine) {
+        ModelAndView modelAndView = new ModelAndView("cuisine");
+        modelAndView.addObject("cuisineInfo", listService.getCuisineInfo());
+
+
+//        modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
+
+        return modelAndView;
+    }
+
+
 
 }

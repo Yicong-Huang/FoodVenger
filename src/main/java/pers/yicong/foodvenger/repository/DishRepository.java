@@ -4,9 +4,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pers.yicong.foodvenger.model.Dish;
 
+import java.util.List;
 
-@Repository("cuisineRepository")
-public interface DishRepository extends CrudRepository<Dish, Integer> {
 
+@Repository("dishRepository")
+public interface DishRepository extends CrudRepository<Dish, String> {
+    List<Dish> findAllByNameContains(String pattern);
 
 }

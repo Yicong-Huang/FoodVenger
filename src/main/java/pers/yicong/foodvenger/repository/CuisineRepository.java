@@ -1,17 +1,15 @@
 package pers.yicong.foodvenger.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 import pers.yicong.foodvenger.model.Cuisine;
 
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 
 
 @Repository("cuisineRepository")
 public interface CuisineRepository extends CrudRepository<Cuisine, Integer> {
 
-
+    List<Cuisine> findAllByTypeContains(String pattern);
 
 }

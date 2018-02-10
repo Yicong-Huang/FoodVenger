@@ -11,6 +11,5 @@ public interface ListService {
     Page<Restaurant> listAllByPage(Pageable pageable, String pattern);
 
 
-
-
+    String getCuisineInfo();
 }

@@ -21,48 +21,60 @@
 
 </head>
 <body>
-<form th:action="@{/}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-</form>
+
 
 <div class="container">
+    <form th:action="@{/}" method="get">
+        <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+    </form>
 
-    <div class="col-md-6 col-md-offset-3">
-        <li th:each="rest,restStat:${page.content}">
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <div class="panel-body">
+                <div class="col">
+                    <li th:each="rest,restStat:${page.content}">
 
-            <div class="card" style="width: 80%; height:30%">
-
-
-                <img class="card-img-top" th:src="${rest.image}"
-                     alt="Card image cap">
-                <div class="card-body">
-                    <h1 class="card-text display-3" th:text="${rest.name}"></h1>
-                    <div class="row">
-                        <div class="col">
+                        <div class="card" style="width: 80%; height:30%">
 
 
-                            <div class="row">
-                                <div class="col">
+                            <img class="card-img-top" th:src="${rest.image}" style="width: 100%; height:400px"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <h1 class="card-text display-3" th:text="${rest.name}"></h1>
+                                <div class="row">
+                                    <div class="col">
 
-                                    <div class="card-text" th:text="${rest.rating.rating}"></div>
+
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <div class="card-text" th:text="${rest.rating.rating}"></div>
+                                            </div>
+
+
+                                            <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
+                                                <a th:href="@{/search/cuisine(${cuisine.type})}" class="btn btn-link"
+                                                   role="button" th:text="${cuisine.type}"></a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <address th:text="${rest.addr}"></address>
+                                    </div>
                                 </div>
 
-
-                                <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
-                                    <p th:text="${cuisine.type}">...</p>
-                                </div>
 
                             </div>
                         </div>
-                        <div class="col">
-                            <address th:text="${rest.addr}"></address>
-                        </div>
-                    </div>
-
-
+                    </li>
                 </div>
             </div>
-        </li>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+        </div>
     </div>
 
 </div>
