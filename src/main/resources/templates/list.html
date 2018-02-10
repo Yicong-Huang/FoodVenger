@@ -25,31 +25,41 @@
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
 </form>
 
-<div class="container-fluid">
+<div class="container">
 
     <div class="col-md-6 col-md-offset-3">
         <li th:each="rest,restStat:${page.content}">
-            <!--<div th:class="${restStat.index}% 4 == 1  ? 'row' : 'col'">-->
-            <!--<div th:class="${restStat.index}% 4 == 3 ? 'row' : 'col'">-->
-            <div class="card" style="width: 80%;">
+
+            <div class="card" style="width: 80%; height:30%">
 
 
                 <img class="card-img-top" th:src="${rest.image}"
                      alt="Card image cap">
                 <div class="card-body">
                     <h1 class="card-text display-3" th:text="${rest.name}"></h1>
+                    <div class="row">
+                        <div class="col">
 
-                    <address th:text="${rest.addr}"></address>
-                    <div th:text="${rest.rating.rating}"></div>
+
+                            <div class="row">
+                                <div class="col">
+
+                                    <div class="card-text" th:text="${rest.rating.rating}"></div>
+                                </div>
 
 
-                    <div th:each="cuisine,cuiStat:${rest.cuisines}">
-                        <p th:text="${cuisine.type}">...</p>
+                                <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
+                                    <p th:text="${cuisine.type}">...</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <address th:text="${rest.addr}"></address>
+                        </div>
                     </div>
 
 
-                    <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
         </li>
@@ -62,7 +72,7 @@
 <ul class="pagination" data-th-if="${page.totalPages gt 7}">
     <!-- 上一页 -->
     <li class="page-item" data-th-classappend="*{first} ? 'disabled' : ''">
-        <a th:href="@{/list(page=${page.number-1},size=20)}" class="page-link"
+        <a th:href="@{/list(pattern=${pattern},page=${page.number-1},size=20)}" class="page-link"
            data-th-attr="pageIndex=${page.number} - 1"
            aria-label="Previous">
             <span aria-hidden="true">«</span>
@@ -71,14 +81,15 @@
 
     <!-- 首页 -->
     <li class="page-item" data-th-classappend="${(page.number + 1) eq 1} ? 'active' : ''">
-        <a th:href="@{/list(page=0,size=20)}" class="page-link" data-th-attr="pageIndex=0">1</a>
+        <a th:href="@{/list(pattern=${pattern},page=0,size=20)}" class="page-link" data-th-attr="pageIndex=0">1</a>
     </li>
 
 
     <!-- 当前页面小于等于4 -->
     <li class="page-item" data-th-if="${(page.number + 1) le 4}" data-th-each="i : ${#numbers.sequence(2,5)}"
         data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
-        <a class="page-link" th:href="@{/list(page=${i-1},size=20)}" data-th-attr="pageIndex=${i} - 1">
+        <a class="page-link" th:href="@{/list(pattern=${pattern},page=${i-1},size=20)}"
+           data-th-attr="pageIndex=${i} - 1">
             <span data-th-text="${i}"></span>
         </a>
     </li>
@@ -98,7 +109,7 @@
     <li class="page-item" data-th-if="${(page.totalPages-(page.number + 1)) le 3}"
         data-th-each="i : ${#numbers.sequence(page.totalPages-4, page.totalPages-1)}"
         data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
-        <a class="page-link" th:href="@{/list(page=${i},size=20)}" data-th-attr="pageIndex=${i} - 1">
+        <a class="page-link" th:href="@{/list(pattern=${pattern},page=${i},size=20)}" data-th-attr="pageIndex=${i} - 1">
             <span data-th-text="${i}"></span>
         </a>
     </li>
@@ -112,7 +123,8 @@
         </a>
     </li>
     <li class="page-item" data-th-if="${((page.number + 1) gt 4) && ((page.totalPages-(page.number + 1)) gt 3 )}">
-        <a th:href="@{/list(page=${page.number+1},size=20)}" class="page-link" data-th-attr="pageIndex=${page.number}"
+        <a th:href="@{/list(pattern=${pattern},page=${page.number+1},size=20)}" class="page-link"
+           data-th-attr="pageIndex=${page.number}"
            th:text="${page.number}"></a>
     </li>
     <li class="page-item active"
@@ -121,27 +133,27 @@
            th:text="${page.number+1}"></a>
     </li>
     <li class="page-item" data-th-if="${((page.number + 1) gt 4) && ((page.totalPages-(page.number + 1)) gt 3 )}">
-        <a th:href="@{/list(page=${page.number+2},size=20)}" class="page-link"
+        <a th:href="@{/list(pattern=${pattern},page=${page.number+2},size=20)}" class="page-link"
            data-th-attr="pageIndex=${page.number} + 2"
            th:text="${page.number+2}"></a>
     </li>
 
     <li class="page-item disabled"
         data-th-if="${((page.number + 1) gt 4) && ((page.totalPages-(page.number + 1)) gt 3 )}">
-        <a th:href="@{/list(page=${page.number+1},size=20)}" class="page-link">
+        <a th:href="@{/list(pattern=${pattern},page=${page.number+1},size=20)}" class="page-link">
             <span aria-hidden="true">...</span>
         </a>
     </li>
 
     <!-- 最后一页 -->
     <li class="page-item" data-th-classappend="${(page.number + 1) eq page.totalPages} ? 'active' : ''">
-        <a th:href="@{/list(page=${page.totalPages-1},size=20)}" class="page-link"
+        <a th:href="@{/list(pattern=${pattern},page=${page.totalPages-1},size=20)}" class="page-link"
            data-th-attr="pageIndex=${page.totalPages} - 1" th:text="${page.totalPages}"></a>
     </li>
 
     <!-- 下一页 -->
     <li class="page-item" data-th-classappend="*{last} ? 'disabled' : ''">
-        <a th:href="@{/list(page=${page.number+1},size=20)}" class="page-link"
+        <a th:href="@{/list(pattern=${pattern},page=${page.number+1},size=20)}" class="page-link"
            data-th-attr="pageIndex=${page.number} + 1" aria-label="Next">
             <span aria-hidden="true">»</span>
         </a>

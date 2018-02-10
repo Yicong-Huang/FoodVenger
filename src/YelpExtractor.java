@@ -18,8 +18,6 @@ public class YelpExtractor {
                 con.setReadTimeout(2000);
                 con.setRequestProperty("Authorization", "Bearer M864mCG359JqoTOj38ejlEA5-HAlsXTOPoSj9kN0XUILwdl_ldd8cBdXpwK2hBi6U6kulwEf3NIPEYQZ3p46r3rdIaSBJfVZFCwTpbdFdGZlzSNR5i8IKe2wiqNnWnYx");
 
-
-
                 int status = con.getResponseCode();
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()));

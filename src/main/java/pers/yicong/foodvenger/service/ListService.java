@@ -8,7 +8,9 @@ public interface ListService {
     Iterable<Restaurant> findAllRestaurants();
 
 
-    Page<Restaurant> listAllByPage(Pageable pageable);
+    Page<Restaurant> listAllByPage(Pageable pageable, String pattern);
+
+
 
 
 }
