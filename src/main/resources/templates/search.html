@@ -17,6 +17,45 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script type="text/css">
+        #custom-search-form {
+            margin: 0;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        #custom-search-form .search-query {
+            padding-right: 3px;
+            padding-right: 4px \9;
+            padding-left: 3px;
+            padding-left: 4px \9;
+            /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+            margin-bottom: 0;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        #custom-search-form button {
+            border: 0;
+            background: none;
+            /** belows styles are working good */
+            padding: 2px 5px;
+            margin-top: 2px;
+            position: relative;
+            left: -28px;
+            /* IE7-8 doesn't have border-radius, so don't indent the padding */
+            margin-bottom: 0;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .search-query:focus + button {
+            z-index: 3;
+        }
+    </script>
 
 
 </head>
@@ -24,6 +63,16 @@
 
 
 <div class="container">
+    <!--<div id="search">-->
+
+    <!--<form th:action="@{/list}" method="get">-->
+    <!--<div class="form-group">-->
+    <!--<input type="text" name="pattern" placeholder="Search..">-->
+    <!--</div>-->
+    <!--<button class="btn btn-primary btn-lg" type="Submit">Search</button>-->
+    <!--</form>-->
+    <!--</div>-->
+
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
@@ -34,19 +83,20 @@
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="${userName}"></span>
+                <span th:utext="${session.userName}"></span>
             </div>
-            <div class="panel-body">
 
-                <form th:action="@{/list}" method="get">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Example label</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input"
-                               name="pattern">
-                    </div>
-                    <button type="button" class="btn btn-primary btn-lg" type="Submit">Search</button>
-                </form>
+            <div class="row">
+                <div class="span12">
+                    <form id="custom-search-form" class="form-search form-horizontal pull-right" th:action="@{/list}">
+                        <div class="input-append span12">
+                            <input type="text" class="search-query" placeholder="Search" name="pattern">
+                            <button type="submit" class="btn"><i class="icon-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
             <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
         </div>
     </div>
