@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Food List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,60 +17,80 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script type="javascript">
 
+        $(".myBox").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+    </script>
 
 </head>
 <body>
 
 
 <div class="container">
-    <form th:action="@{/}" method="get">
-        <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
     </form>
+
+
+    <hgroup class="mb20">
+        <h1>Search Results</h1>
+        <h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong
+                class="text-danger">Lorem</strong></h2>
+    </hgroup>
 
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="${userName}"></span>
+                <span th:utext="${session.userName}"></span>
             </div>
             <div class="panel-body">
                 <div class="col">
-                    <li th:each="rest,restStat:${page.content}">
-
-                        <div class="card" style="width: 80%; height:30%">
-
-
-                            <img class="card-img-top" th:src="${rest.image}" style="width: 100%; height:400px"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <h1 class="card-text display-3" th:text="${rest.name}"></h1>
-                                <div class="row">
-                                    <div class="col">
+                    <div th:each="rest,restStat:${page.content}">
+                        <a th:href="@{/restaurant(id=${rest.id})}"
+                           style="width: 100%; height:100%; color: #000000; text-decoration: none;">
+                            <div class="card" style="width: 80%;">
 
 
-                                        <div class="row">
-                                            <div class="col">
+                                <img class="card-img-top" th:src="${rest.image}" style="width: 100%; height:300px"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <span class="card-text display-4" th:text="${rest.name}"></span>
 
-                                                <div class="card-text" th:text="${rest.rating.rating}"></div>
+                                    <div class="row">
+                                        <div class="col">
+
+
+                                            <div class="row">
+                                                <div class="col">
+
+                                                    <div class="card-text" th:text="${rest.rating.rating}"></div>
+                                                </div>
+
+
+                                                <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
+                                                    <div th:href="@{/search/cuisine(cuisine=${cuisine.type})}"
+                                                         class="btn btn-link"
+                                                         role="button" th:text="${cuisine.type}"></div>
+                                                </div>
+
                                             </div>
-
-
-                                            <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
-                                                <a th:href="@{/search/cuisine(${cuisine.type})}" class="btn btn-link"
-                                                   role="button" th:text="${cuisine.type}"></a>
-                                            </div>
-
+                                        </div>
+                                        <div class="col">
+                                            <address th:text="${rest.addr}"></address>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <address th:text="${rest.addr}"></address>
-                                    </div>
+
+
                                 </div>
-
-
                             </div>
-                        </div>
-                    </li>
+
+                        </a>
+                    </div>
                 </div>
             </div>
             <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>

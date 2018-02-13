@@ -35,7 +35,7 @@ public class FoodListController {
         return modelAndView;
     }
 
-    @RequestMapping("/search/cuisine/")
+    @RequestMapping("/search/cuisine")
     ModelAndView search(@RequestParam String cuisine) {
         ModelAndView modelAndView = new ModelAndView("cuisine");
         modelAndView.addObject("cuisineInfo", listService.getCuisineInfo());

@@ -50,11 +50,6 @@ public class ListServiceImpl implements ListService {
         }
 
 
-
-
-        System.out.println("here!!!" + pageable.getPageNumber());
-        System.out.println(pageable.getPageSize());
-
         int start = pageable.getOffset();
         int end = (start + pageable.getPageSize()) > r1.size() ? r1.size() : (start + pageable.getPageSize());
 
@@ -64,7 +59,7 @@ public class ListServiceImpl implements ListService {
 
     @Override
     public String getCuisineInfo() {
-        return null;
+        return "Cuisine Info";
     }
 
 

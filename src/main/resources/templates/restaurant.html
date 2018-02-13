@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Food List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function doAjaxPost(did) {
+            $.get("/add?did=" + did, function (result) {
+                $("#cart").load(location.href + " #cart");
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+
+
+<div class="container">
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="'Welcome' + ${session.userName}"></span>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="card" style="width: 80%; height:30%">
+
+
+                            <img class="card-img-top" th:src="${rest.image}" style="width: 100%; height:400px"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <h1 class="card-text display-3" th:text="${rest.name}"></h1>
+                                <div class="row">
+                                    <div class="col">
+
+
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <div class="card-text" th:text="${rest.rating.rating}"></div>
+                                            </div>
+
+
+                                            <div class="col" th:each="cuisine,cuiStat:${rest.cuisines}">
+                                                <a th:href="@{/search/cuisine(cuisine=${cuisine.type})}"
+                                                   class="btn btn-link"
+                                                   role="button" th:text="${cuisine.type}"></a>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col">
+                                        <address th:text="${rest.addr}"></address>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <ul th:each="dish,dishStat:${rest.dishes}">
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a th:href="@{/search/dish(dish=${dish.name})}"
+                                                           class="btn btn-link"
+                                                           role="button" th:text="${dish.name}">
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p th:text="${dish.price}"></p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a id="addlink"
+                                                           th:onclick="'javascript:doAjaxPost('+${dish.id}+');'"
+                                                           style="width: 100%; height:100%; color: #000000; text-decoration: none;">
+                                                            <img th:src="@{/images/svg/plus.svg}"
+                                                                 style="width:20px;height:20px">
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <div class="container">
+                            <table class="row table table-hover table-condensed" id="cart">
+                                <thead>
+                                <tr>
+                                    <th style="width:43%">Dish</th>
+                                    <th style="width:10%">Price</th>
+                                    <th style="width:15%">Quantity</th>
+                                    <th style="width:22%" class="text-center">Subtotal</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                                </thead>
+                                <div th:each="dish,dishStat:${session.cart?.dishes}">
+                                    <td class="container" data-th="Product">
+                                        <div class="row">
+                                            <!--<div class="col-sm-2 hidden-xs">-->
+                                            <!--<img src="http://placehold.it/100x100"-->
+                                            <!--alt="..."-->
+                                            <!--class="img-responsive"/></div>-->
+                                            <div class="col-sm-10">
+                                                <p th:text="${dish.name}">
+
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td data-th="Price" th:text="'$'+ ${dish.price}">
+
+                                    </td>
+                                    <td data-th="Quantity">
+                                        <!--<input type="number" class="form-control text-center"-->
+                                        <!--value="1"/>-->
+                                        <input type="number" class="form-control text-center" style="width:75px;"
+                                               th:value="${dish.num}">
+                                    </td>
+
+
+                                    </td>
+                                    <td data-th="Subtotal" class="text-center"
+                                        th:text="${dish.price} * ${dish.num}"></td>
+                                    <td class="actions" data-th="">
+                                        <!--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i>-->
+                                        <!--</button>-->
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
+
+                                </div>
+                                <tfoot>
+                                <tr>
+
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td class="hidden-xs text-center">
+                                        <strong>Total $1.99</strong>
+                                    </td>
+                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i
+                                            class="fa fa-angle-right"></i></a>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -21,9 +21,15 @@ public class Dish {
     @NotEmpty()
     private int cid;
 
+    @Column(name = "price")
+    @NotEmpty()
+    private float price;
+
 
     @ManyToMany(mappedBy = "dishes")
     private Set<Restaurant> restaurants;
+
+    private int num = 1;
 
 
     public Set<Restaurant> getRestaurants() {
@@ -33,7 +39,6 @@ public class Dish {
     public void setRestaurants(Set<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
-
 
 
     public String getId() {
@@ -59,5 +64,21 @@ public class Dish {
 
     public void setCid(int cid) {
         this.cid = cid;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }
