@@ -35,13 +35,11 @@ public class FoodListController {
         return modelAndView;
     }
 
-    @RequestMapping("/search/cuisine")
+    @RequestMapping("/browse/cuisine")
     ModelAndView search(@RequestParam String cuisine) {
         ModelAndView modelAndView = new ModelAndView("cuisine");
         modelAndView.addObject("cuisineInfo", listService.getCuisineInfo());
 
-
-//        modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
 
         return modelAndView;
     }

@@ -12,7 +12,9 @@ import pers.yicong.foodvenger.repository.CuisineRepository;
 import pers.yicong.foodvenger.repository.DishRepository;
 import pers.yicong.foodvenger.repository.RestaurantRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service("listService")
 public class ListServiceImpl implements ListService {
@@ -35,11 +37,13 @@ public class ListServiceImpl implements ListService {
     @Override
     public Page<Restaurant> listAllByPage(Pageable pageable, String pattern) {
 
-        List<Restaurant> r1 = restaurantRepository.findAllByAddrContainsOrNameContains(pattern, pattern);
+        Set<Restaurant> r1 = restaurantRepository.findAllByAddrContainsOrNameContains(pattern, pattern);
 
         List<Cuisine> c1 = cuisineRepository.findAllByTypeContains(pattern);
 
         for (Cuisine c : c1) {
+
+
             r1.addAll(c.getRestaurants());
         }
 
@@ -53,8 +57,9 @@ public class ListServiceImpl implements ListService {
         int start = pageable.getOffset();
         int end = (start + pageable.getPageSize()) > r1.size() ? r1.size() : (start + pageable.getPageSize());
 
-
-        return new PageImpl<>(r1.subList(start, end), pageable, r1.size());
+        List<Restaurant> r2 = new ArrayList<>();
+        r2.addAll(r1);
+        return new PageImpl<>(r2.subList(start, end), pageable, r1.size());
     }
 
     @Override

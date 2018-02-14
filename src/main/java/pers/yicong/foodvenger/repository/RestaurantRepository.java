@@ -6,12 +6,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import pers.yicong.foodvenger.model.Restaurant;
 
-import java.util.List;
+import java.util.Set;
 
 
 @Repository("restaurantRepository")
 public interface RestaurantRepository extends JpaRepository<Restaurant, String>, PagingAndSortingRepository<Restaurant, String> {
-    List<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);
+    Set<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);
 
 
 }
