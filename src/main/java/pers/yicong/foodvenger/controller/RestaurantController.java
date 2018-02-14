@@ -45,7 +45,17 @@ public class RestaurantController {
             cart.addDish(dishService.getDish(did));
             httpSession.setAttribute("cart", cart);
         }
-//        return cart.getDishes();
+
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public void del(@RequestParam("did") String did, HttpSession httpSession) {
+
+        Cart cart = ((Cart) httpSession.getAttribute("cart"));
+        cart.delDish(dishService.getDish(did));
+        httpSession.setAttribute("cart", cart);
+
 
     }
 

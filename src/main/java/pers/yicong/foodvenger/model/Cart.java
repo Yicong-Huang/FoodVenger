@@ -29,11 +29,23 @@ public class Cart {
                 return;
             }
         }
+        dish.setNum(dish.getNum() + 1);
         dishes.add(dish);
 
     }
 
     public int size() {
         return dishes.size();
+    }
+
+    public void delDish(Dish dish) {
+        for (Dish d : dishes) {
+            if (d.getId().equals(dish.getId())) {
+                dishes.remove(d);
+                return;
+            }
+        }
+
+
     }
 }
