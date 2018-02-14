@@ -24,26 +24,33 @@ public class FoodListController {
 
     @RequestMapping("/list")
     ModelAndView list(Pageable pageable, @RequestParam String pattern) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("list");
 
         modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
         modelAndView.addObject("pattern", pattern);
 
 
-        modelAndView.setViewName("list");
+        return modelAndView;
+    }
+
+    @RequestMapping("/browse/cuisines")
+    ModelAndView browseByCuisine() {
+        ModelAndView modelAndView = new ModelAndView("cuisines");
+        modelAndView.addObject("cuisines", listService.listAllCuisines());
+
 
         return modelAndView;
     }
 
-    @RequestMapping("/browse/cuisine")
-    ModelAndView search(@RequestParam String cuisine) {
+    @RequestMapping("/search/cuisine")
+    ModelAndView search(Pageable pageable, @RequestParam String cuisine) {
         ModelAndView modelAndView = new ModelAndView("cuisine");
-        modelAndView.addObject("cuisineInfo", listService.getCuisineInfo());
+        modelAndView.addObject("cuisineInfo", cuisine);
+        modelAndView.addObject("page", listService.listRestaurantsByCuisine(pageable, cuisine));
 
 
         return modelAndView;
     }
-
 
 
 }

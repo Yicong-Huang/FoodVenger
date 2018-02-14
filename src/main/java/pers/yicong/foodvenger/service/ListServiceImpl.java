@@ -55,8 +55,10 @@ public class ListServiceImpl implements ListService {
 
 
         int start = pageable.getOffset();
+
         int end = (start + pageable.getPageSize()) > r1.size() ? r1.size() : (start + pageable.getPageSize());
 
+        System.out.println("start:::" + start + "end:::" + end);
         List<Restaurant> r2 = new ArrayList<>();
         r2.addAll(r1);
         return new PageImpl<>(r2.subList(start, end), pageable, r1.size());
@@ -65,6 +67,24 @@ public class ListServiceImpl implements ListService {
     @Override
     public String getCuisineInfo() {
         return "Cuisine Info";
+    }
+
+    @Override
+    public Iterable<Cuisine> listAllCuisines() {
+        return cuisineRepository.findAll();
+
+    }
+
+    @Override
+    public Iterable<Restaurant> listRestaurantsByCuisine(Pageable pageable, String type) {
+
+        Set<Restaurant> a = cuisineRepository.findAllByType(type).iterator().next().getRestaurants();
+        List<Restaurant> a2 = new ArrayList<>();
+        a2.addAll(a);
+
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > a2.size() ? a2.size() : (start + pageable.getPageSize());
+        return new PageImpl<>(a2.subList(start, end), pageable, a2.size());
     }
 
 
