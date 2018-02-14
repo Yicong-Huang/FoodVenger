@@ -1,35 +1,73 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title>Admin Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/css">
+        .ds-btn li {
+            list-style: none;
+            float: left;
+            padding: 10px;
+        }
+
+        .ds-btn li a span {
+            padding-left: 15px;
+            padding-right: 5px;
+            width: 100%;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .ds-btn li a span small {
+            width: 100%;
+            display: inline-block;
+            text-align: left;
+        }
+
+    </script>
 </head>
 
 <body>
-	<div class="container">
-	
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>    
-		
-		<div class="panel-group" style="margin-top:40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
-				</div>
-				<div class="panel-body">
-					<img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400" alt="Beer" /> 
-				</div>
-				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-			</div>
-		</div>
-		
-	</div>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <ul>
+                <li>
+                    <a class="btn btn-lg btn-warning" href="/search">
+                        <i class="glyphicon glyphicon-search pull-left"></i><span>Search<br><small>Find your favourite Restaurant</small></span></a>
+                </li>
+                <li>
+                    <a class="btn btn-lg btn-info" href="/browse">
+                        <i class="glyphicon glyphicon-list pull-left"></i><span>Browse<br><small>By Cuisine</small></span></a>
+                </li>
+                <li>
+                    <a class="btn btn-lg btn-info" href="/browse">
+                        <i class="glyphicon glyphicon-list pull-left"></i><span>Browse<br><small>By Dish</small></span></a>
+                </li>
+            </ul>
+            <div class="panel-body">
+                <img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400"
+                     alt="Beer"/>
+            </div>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

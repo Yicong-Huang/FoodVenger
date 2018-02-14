@@ -4,58 +4,200 @@
 <head>
     <title>Food List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script type="text/css">
-        #custom-search-form {
-            margin: 0;
-            margin-top: 5px;
-            padding: 0;
-        }
 
-        #custom-search-form .search-query {
-            padding-right: 3px;
-            padding-right: 4px \9;
-            padding-left: 3px;
-            padding-left: 4px \9;
-            /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
+    <script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
+    <script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"/>
+    <link rel="mask-icon" type=""
+          href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
+          color="#111"/>
+    <link rel="canonical"
+          href="https://codepen.io/supah/pen/XdKMJK?depth=everything&order=popularity&page=63&q=translate&show_forks=false"/>
 
-            margin-bottom: 0;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400'>
+    <style class="cp-pen-styles">/*--------------------
+Body
+--------------------*/
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 
-        #custom-search-form button {
-            border: 0;
-            background: none;
-            /** belows styles are working good */
-            padding: 2px 5px;
-            margin-top: 2px;
-            position: relative;
-            left: -28px;
-            /* IE7-8 doesn't have border-radius, so don't indent the padding */
-            margin-bottom: 0;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
+    body {
+        height: 100vh;
+        margin: 0;
+        background: #DEDEDE;
+        color: #5a6674;
+        font-size: 13px;
+        font-family: 'Roboto', sans-serif;
+        overflow: hidden;
+    }
 
-        .search-query:focus + button {
-            z-index: 3;
-        }
-    </script>
+    .search-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 350px;
+        height: 40px;
+        border-radius: 40px;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: #fff;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .search-form.focus {
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .search-input {
+        position: absolute;
+        top: 10px;
+        left: 38px;
+        font-size: 14px;
+        background: none;
+        color: #5a6674;
+        width: 195px;
+        height: 20px;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+    }
+
+    .search-input::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .search-button {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        height: 20px;
+        width: 20px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        outline: none !important;
+        cursor: pointer;
+    }
+
+    .search-button svg {
+        width: 20px;
+        height: 20px;
+        fill: #5a6674;
+    }
+
+    .search-option {
+        position: absolute;
+        text-align: right;
+        top: 10px;
+        right: 15px;
+    }
+
+    .search-option div {
+        position: relative;
+        display: inline-block;
+        margin: 0 1px;
+        cursor: pointer;
+    }
+
+    .search-option div input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.01;
+        cursor: pointer;
+    }
+
+    .search-option div span {
+        position: absolute;
+        display: block;
+        text-align: center;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        opacity: 0;
+        background: #929AA3;
+        color: #fff;
+        font-size: 9px;
+        letter-spacing: 1px;
+        line-height: 1;
+        text-transform: uppercase;
+        padding: 4px 7px;
+        border-radius: 12px;
+        top: -18px;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+    .search-option div span::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        border-top: 4px solid #929AA3;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+    .search-option div:hover span {
+        opacity: 1;
+        top: -21px;
+    }
+
+    .search-option div label {
+        display: block;
+        cursor: pointer;
+    }
+
+    .search-option div svg {
+        height: 20px;
+        width: 20px;
+        fill: #5a6674;
+        opacity: 0.6;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        pointer-events: none;
+    }
+
+    .search-option div:hover svg {
+        opacity: 1;
+    }
+
+    .search-option div input:checked + label svg {
+        fill: #e24040;
+        opacity: .9;
+    }
+
+    .search-option div input:checked + label span {
+        background: #e24040;
+    }
+
+    .search-option div input:checked + label span::after {
+        border-top-color: #e24040;
+    }
+    </style>
 
 
 </head>
@@ -80,29 +222,34 @@
         </button>
     </form>
 
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <span th:utext="${session.userName}"></span>
-            </div>
 
-            <div class="row">
-                <div class="span12">
-                    <form id="custom-search-form" class="form-search form-horizontal pull-right" th:action="@{/list}">
-                        <div class="input-append span12">
-                            <input type="text" class="search-query" placeholder="Search" name="pattern">
-                            <button type="submit" class="btn"><i class="icon-search"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="container">
+        <form class="search-form" th:action="@{/list}">
+            <input type="search" value="" placeholder="Search" class="search-input" name="pattern">
+            <button type="submit" class="search-button">
+                <svg class="submit-button">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search"></use>
+                </svg>
+            </button>
+        </form>
 
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" display="none">
+            <symbol id="search" viewBox="0 0 32 32">
+                <path d="M 19.5 3 C 14.26514 3 10 7.2651394 10 12.5 C 10 14.749977 10.810825 16.807458 12.125 18.4375 L 3.28125 27.28125 L 4.71875 28.71875 L 13.5625 19.875 C 15.192542 21.189175 17.250023 22 19.5 22 C 24.73486 22 29 17.73486 29 12.5 C 29 7.2651394 24.73486 3 19.5 3 z M 19.5 5 C 23.65398 5 27 8.3460198 27 12.5 C 27 16.65398 23.65398 20 19.5 20 C 15.34602 20 12 16.65398 12 12.5 C 12 8.3460198 15.34602 5 19.5 5 z"></path>
+            </symbol>
+
+        </svg>
     </div>
+    <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script>$('.search-input').focus(function () {
+        $(this).parent().addClass('focus');
+    }).blur(function () {
+        $(this).parent().removeClass('focus');
+    })
+    </script>
 
-</div>
-
+    =
 
 </body>
 </html>
