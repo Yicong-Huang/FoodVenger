@@ -216,7 +216,8 @@ Body
 
     <div class="container">
         <form class="search-form" th:action="@{/list}">
-            <input type="search" value="" placeholder="Search" class="search-input" name="pattern">
+            <input type="search" value="" placeholder="Search" class="search-input" name="pattern"/>
+            <input hidden name="sort" value=""/>
             <button type="submit" class="search-button">
                 <svg class="submit-button">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search"></use>

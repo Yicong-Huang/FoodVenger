@@ -23,10 +23,17 @@ public class FoodListController {
     }
 
     @RequestMapping("/list")
-    ModelAndView list(Pageable pageable, @RequestParam String pattern) {
+    ModelAndView list(Pageable pageable, @RequestParam String pattern, @RequestParam String sort) {
         ModelAndView modelAndView = new ModelAndView("list");
+        if (sort.equals("rating")) {
+            modelAndView.addObject("page", listService.listAllByPageWithRating(pageable, pattern));
 
-        modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
+        } else if (sort.equals("name")) {
+            modelAndView.addObject("page", listService.listAllByPageWithName(pageable, pattern));
+        } else {
+            modelAndView.addObject("page", listService.listAllByPage(pageable, pattern));
+        }
+
         modelAndView.addObject("pattern", pattern);
 
 

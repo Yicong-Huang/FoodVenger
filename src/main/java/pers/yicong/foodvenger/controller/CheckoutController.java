@@ -13,9 +13,10 @@ public class CheckoutController {
     @Autowired
     CheckoutService checkoutService;
 
-    @RequestMapping
+    @RequestMapping("/checkout")
     public ModelAndView checkout(HttpSession httpSession) {
-        return new ModelAndView();
+
+        return new ModelAndView("checkout");
     }
 
 }

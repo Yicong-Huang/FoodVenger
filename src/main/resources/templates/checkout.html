@@ -1,11 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Checkout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+
 </head>
+
 <body>
 
 
+<div class="container">
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="'Welcome' + ${session.userName}"></span>
+            </div>
+            <div class="panel-body"
+
+            <div class="container">
+                <table class="row table table-hover table-condensed" id="cart">
+                    <thead>
+                    <tr>
+                        <th style="width:43%">Dish</th>
+                        <th style="width:10%">Price</th>
+                        <th style="width:15%">Quantity</th>
+                        <th style="width:22%" class="text-center">Subtotal</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="dish,dishStat:${session.cart?.dishes}">
+                        <div class="container" data-th="Product">
+                            <div class="row">
+
+                                <div class="col" th:text="${dish.name}">
+
+                                </div>
+
+
+                                <div class="col" data-th="Price" th:text="'$'+ ${dish.price}">
+
+                                </div>
+                                <div class="col" data-th="Quantity" th:value="${dish.num}">
+                                </div>
+
+
+                                <div data-th="Subtotal" class="col"
+                                     th:text="${dish.price} * ${dish.num}"></div>
+                            </div>
+
+                        </div>
+
+                    </
+                    >
+                    <tfoot>
+                    <tr>
+
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center">
+                            <strong>Total $1.99</strong>
+                        </td>
+                        <td><a href="/checkout" class="btn btn-success btn-block">Submit Order<i
+                                class="fa fa-angle-right"></i></a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+
+        </div>
+        <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+
+    </div>
+</div>
+
+</div>
+
 </body>
+
 </html>

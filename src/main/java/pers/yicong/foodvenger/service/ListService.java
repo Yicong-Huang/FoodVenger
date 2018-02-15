@@ -17,4 +17,8 @@ public interface ListService {
     Iterable<Cuisine> listAllCuisines();
 
     Iterable<Restaurant> listRestaurantsByCuisine(Pageable pageable, String type);
+
+    Page<Restaurant> listAllByPageWithRating(Pageable pageable, String pattern);
+
+    Page<Restaurant> listAllByPageWithName(Pageable pageable, String pattern);
 }
