@@ -16,7 +16,7 @@ public class Rating {
     @NotEmpty
     private float rating;
 
-    @Column(name = "numVotes")
+    @Column(name = "num_votes")
     @NotEmpty
     private int numVotes;
 

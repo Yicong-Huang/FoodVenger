@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <title>Checkout</title>
+    <title>Admin Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}"/>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -18,14 +18,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
-
-
 <div class="container">
+
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
                 type="Submit">Logout
@@ -35,39 +32,24 @@
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="'Welcome ' + ${session.userName}"></span>
+                <span th:utext="${userName}"></span>
             </div>
-            <div class="panel-body">
-
-                <div>
-
-                    Cart Info:
-
-                    <table th:each="dish,dishStat:${session.cart?.dishes}">
-                        <tr>
-                            <td th:utext="'Dish Name:                    '+ ${dish.name}"></td>
-
-
-                            <td th:utext="'Price:                     '+ ${dish.price}"></td>
-
-
-                            <td th:utext="'Number:       '+ ${dish.num}"></td>
-                            <td th:utext="'SubTotal:       '+ ${dish.num* dish.price}"></td>
-                        </tr>
-                    </table>
-
-                </div>
-
-                ALL Sale submited successuflly.
+            <!--<ul>-->
+            <ul th:each="dish,dishStat:${dishes}">
+                <a th:text="${dish.name}" th:href="@{/search/dish(dish=${dish.id})}"></a>
+            </ul>
+            <!--</ul>-->
+            <div>
 
                 <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-
-
             </div>
         </div>
 
+
     </div>
 
-</body>
 
+</div>
+
+</body>
 </html>

@@ -1,8 +1,9 @@
 package pers.yicong.foodvenger.service;
 
-import pers.yicong.foodvenger.model.User;
+import pers.yicong.foodvenger.model.Customer;
 
 public interface UserService {
-	public User findUserByEmail(String email);
-	public void saveUser(User user);
+	Customer findUserByEmail(String email);
+
+	void saveUser(Customer user);
 }

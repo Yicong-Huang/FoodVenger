@@ -29,6 +29,12 @@ public class Dish {
     @ManyToMany(mappedBy = "dishes")
     private Set<Restaurant> restaurants;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "dish")
+    private Set<Sale> sales;
+
+
     private int num = 1;
 
 
@@ -80,5 +86,13 @@ public class Dish {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public Set<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(Set<Sale> sales) {
+        this.sales = sales;
     }
 }

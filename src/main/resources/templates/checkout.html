@@ -35,66 +35,102 @@
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="'Welcome' + ${session.userName}"></span>
+                <span th:utext="'Welcome ' + ${session.userName}"></span>
             </div>
-            <div class="panel-body"
+            <div class="panel-body">
 
-            <div class="container">
-                <table class="row table table-hover table-condensed" id="cart">
-                    <thead>
-                    <tr>
-                        <th style="width:43%">Dish</th>
-                        <th style="width:10%">Price</th>
-                        <th style="width:15%">Quantity</th>
-                        <th style="width:22%" class="text-center">Subtotal</th>
-                        <th style="width:10%"></th>
-                    </tr>
-                    </thead>
-                    <tr th:each="dish,dishStat:${session.cart?.dishes}">
-                        <div class="container" data-th="Product">
-                            <div class="row">
+                <div>
 
-                                <div class="col" th:text="${dish.name}">
+                    Cart Info:
 
-                                </div>
+                    <table th:each="dish,dishStat:${session.cart?.dishes}">
+                        <tr>
+                            <td th:utext="'Dish Name:                    '+ ${dish.name}"></td>
 
 
-                                <div class="col" data-th="Price" th:text="'$'+ ${dish.price}">
-
-                                </div>
-                                <div class="col" data-th="Quantity" th:value="${dish.num}">
-                                </div>
+                            <td th:utext="'Price:                     '+ ${dish.price}"></td>
 
 
-                                <div data-th="Subtotal" class="col"
-                                     th:text="${dish.price} * ${dish.num}"></div>
-                            </div>
+                            <td th:utext="'Number:       '+ ${dish.num}"></td>
+                            <td th:utext="'SubTotal:       '+ ${dish.num* dish.price}"></td>
+                        </tr>
+                    </table>
 
-                        </div>
+                </div>
 
-                    </
-                    >
-                    <tfoot>
-                    <tr>
+                <!--<div class="container">-->
+                <!--<table class="row table table-hover table-condensed" id="cart">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--<th style="width:43%">Dish</th>-->
+                <!--<th style="width:10%">Price</th>-->
+                <!--<th style="width:15%">Quantity</th>-->
+                <!--<th style="width:22%" class="text-center">Subtotal</th>-->
+                <!--<th style="width:10%"></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
 
-                        <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center">
-                            <strong>Total $1.99</strong>
-                        </td>
-                        <td><a href="/checkout" class="btn btn-success btn-block">Submit Order<i
-                                class="fa fa-angle-right"></i></a>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
+                <!--<div th:each="dish,dishStat:${session.cart?.dishes}">-->
+                <!--<tr>-->
+
+                <!--<td class="col" th:text="${dish.name}">-->
+
+                <!--</td>-->
+
+
+                <!--<td class="col" data-th="Price" th:text="'$'+ ${dish.price}">-->
+
+                <!--</td>-->
+                <!--<td class="col" data-th="Quantity" th:value="${dish.num}">-->
+                <!--</td>-->
+
+
+                <!--<td data-th="Subtotal" class="col"-->
+                <!--th:text="${dish.price} * ${dish.num}"></td>-->
+                <!--</tr>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--<tfoot>-->
+                <!--<tr>-->
+
+                <!--<td colspan="2" class="hidden-xs"></td>-->
+                <!--<td class="hidden-xs text-center">-->
+                <!--<strong>Total $1.99</strong>-->
+                <!--</td>-->
+
+                <!--</tr>-->
+                <!--</tfoot>-->
+                <!--</tr>-->
+                <!--</table>-->
+                <!--</div>-->
+
+
             </div>
+            <div>
+
+                Payment Info:
+                <ul>
+                    <li>
+                        <span th:utext="'First Name:                    '+ ${session.customer?.creditCard?.firstName}"></span>
+
+                    </li>
+                    <li>
+                        <span th:utext="'Last Name:                     '+ ${session.customer?.creditCard?.lastName}"></span>
+                    </li>
+                    <li>
+                        <span th:utext="'Expiration Date:       '+ ${session.customer?.creditCard?.expiration}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <td><a href="/checkout/save" class="btn btn-success btn-block">Submit Order<i
+                    class="fa fa-angle-right"></i></a>
+            </td>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 
 
         </div>
-        <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-
     </div>
-</div>
 
 </div>
 

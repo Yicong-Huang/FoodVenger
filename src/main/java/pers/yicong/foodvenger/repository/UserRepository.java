@@ -1,10 +1,10 @@
 package pers.yicong.foodvenger.repository;
 
-import pers.yicong.foodvenger.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pers.yicong.foodvenger.model.Customer;
 
 @Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Long> {
-	 User findByEmail(String email);
+public interface UserRepository extends JpaRepository<Customer, Long> {
+	Customer findByEmail(String email);
 }

@@ -50,7 +50,24 @@ public class FoodListController {
     }
 
     @RequestMapping("/search/cuisine")
-    ModelAndView search(Pageable pageable, @RequestParam String cuisine) {
+    ModelAndView searchCuisine(Pageable pageable, @RequestParam String cuisine) {
+        ModelAndView modelAndView = new ModelAndView("cuisine");
+        modelAndView.addObject("cuisineInfo", cuisine);
+        modelAndView.addObject("page", listService.listRestaurantsByCuisine(pageable, cuisine));
+
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/browse/dishes")
+    ModelAndView browseByDish() {
+        ModelAndView modelAndView = new ModelAndView("dishes");
+        modelAndView.addObject("cuisines", listService.listAllDishes());
+        return modelAndView;
+    }
+
+    @RequestMapping("/search/dish")
+    ModelAndView searchDish(Pageable pageable, @RequestParam String cuisine) {
         ModelAndView modelAndView = new ModelAndView("cuisine");
         modelAndView.addObject("cuisineInfo", cuisine);
         modelAndView.addObject("page", listService.listRestaurantsByCuisine(pageable, cuisine));

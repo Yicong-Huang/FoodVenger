@@ -1,12 +1,12 @@
 package pers.yicong.foodvenger.service;
 
-import pers.yicong.foodvenger.model.Role;
-import pers.yicong.foodvenger.model.User;
-import pers.yicong.foodvenger.repository.RoleRepository;
-import pers.yicong.foodvenger.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pers.yicong.foodvenger.model.Customer;
+import pers.yicong.foodvenger.model.Role;
+import pers.yicong.foodvenger.repository.RoleRepository;
+import pers.yicong.foodvenger.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public User findUserByEmail(String email) {
+	public Customer findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 
 	@Override
-	public void saveUser(User user) {
+	public void saveUser(Customer user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");

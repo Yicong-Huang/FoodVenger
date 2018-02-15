@@ -3,6 +3,7 @@ package pers.yicong.foodvenger.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pers.yicong.foodvenger.model.Cuisine;
+import pers.yicong.foodvenger.model.Dish;
 import pers.yicong.foodvenger.model.Restaurant;
 
 public interface ListService {
@@ -15,6 +16,8 @@ public interface ListService {
     String getCuisineInfo();
 
     Iterable<Cuisine> listAllCuisines();
+
+    Iterable<Dish> listAllDishes();
 
     Iterable<Restaurant> listRestaurantsByCuisine(Pageable pageable, String type);
 

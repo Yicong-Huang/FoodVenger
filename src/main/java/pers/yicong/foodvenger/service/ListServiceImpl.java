@@ -63,6 +63,11 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
+    public Iterable<Dish> listAllDishes() {
+        return dishRepository.findAll();
+    }
+
+    @Override
     public Iterable<Restaurant> listRestaurantsByCuisine(Pageable pageable, String type) {
 
         Set<Restaurant> a = cuisineRepository.findAllByType(type).iterator().next().getRestaurants();
