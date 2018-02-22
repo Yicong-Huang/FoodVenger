@@ -74,7 +74,7 @@ CREATE TABLE dishes_in_restau
   CONSTRAINT FKr8sn543arh2mrehfsm7qayixr
   FOREIGN KEY (did) REFERENCES dishes (id),
   CONSTRAINT dishes_in_restau_dishes_did_fk
-  FOREIGN KEY (did) REFERENCES Dishes (id)
+  FOREIGN KEY (did) REFERENCES dishes (id)
 )
   ENGINE = InnoDB;
 
@@ -141,6 +141,7 @@ CREATE TABLE sales
     PRIMARY KEY,
   cid       INT  NOT NULL,
   did       INT  NOT NULL,
+  num       INT,
   sale_date DATE NOT NULL,
   CONSTRAINT sales_id_uindex
   UNIQUE (id),
