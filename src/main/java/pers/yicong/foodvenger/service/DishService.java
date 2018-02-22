@@ -6,5 +6,5 @@ import pers.yicong.foodvenger.model.Dish;
 public interface DishService {
 
 
-    Dish getDish(String id);
+    Dish getDish(Integer id);
 }

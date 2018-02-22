@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Repository("dishRepository")
-public interface DishRepository extends CrudRepository<Dish, String> {
+public interface DishRepository extends CrudRepository<Dish, Integer> {
     List<Dish> findAllByNameContains(String pattern);
 
 }

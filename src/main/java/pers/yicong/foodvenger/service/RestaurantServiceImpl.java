@@ -20,7 +20,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private DishRepository dishRepository;
 
     @Override
-    public Restaurant getRestaurant(String id) {
+    public Restaurant getRestaurant(Integer id) {
         return restaurantRepository.findOne(id);
     }
 

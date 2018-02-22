@@ -11,31 +11,31 @@ public class Dish {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "name")
-    @NotEmpty()
-
+    @NotEmpty
     private String name;
+
     @Column(name = "cid")
-    @NotEmpty()
-    private int cid;
+    @NotEmpty
+    private Integer cid;
 
     @Column(name = "price")
-    @NotEmpty()
+    @NotEmpty
     private float price;
 
 
     @ManyToMany(mappedBy = "dishes")
     private Set<Restaurant> restaurants;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "dish")
-    private Set<Sale> sales;
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "dish")
+//    private Set<Sale> sales;
 
 
-    private int num = 1;
+    private Integer num = 1;
 
 
     public Set<Restaurant> getRestaurants() {
@@ -47,11 +47,11 @@ public class Dish {
     }
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -64,11 +64,11 @@ public class Dish {
         this.name = name;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
@@ -80,19 +80,19 @@ public class Dish {
         this.price = price;
     }
 
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
-    public Set<Sale> getSales() {
-        return sales;
-    }
+//    public Set<Sale> getSales() {
+//        return sales;
+//    }
 
-    public void setSales(Set<Sale> sales) {
-        this.sales = sales;
-    }
+//    public void setSales(Set<Sale> sales) {
+//        this.sales = sales;
+//    }
 }

@@ -9,13 +9,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
+    private Integer id;
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
@@ -31,34 +31,34 @@ public class Customer {
     @Column(name = "lastName")
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "active")
-    private int active;
+    private Integer active;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "sales", joinColumns = @JoinColumn(name = "id", referencedColumnName = "cid"))
-//    private Set<Sale> sales;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "customer")
-    private Set<Sale> sales;
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "customer")
+//    private Set<Sale> sales;
 
 
     @Column(name = "ccid")
-    private String ccId;
+    private Integer ccId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "ccid")
     private CreditCard creditCard;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -94,11 +94,11 @@ public class Customer {
         this.email = email;
     }
 
-    public int getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 
@@ -118,19 +118,27 @@ public class Customer {
         this.creditCard = creditCard;
     }
 
-    public String getCcId() {
+    public Integer getCcId() {
         return ccId;
     }
 
-    public void setCcId(String ccId) {
+    public void setCcId(Integer ccId) {
         this.ccId = ccId;
     }
 
-    public Set<Sale> getSales() {
-        return sales;
+//    public Set<Sale> getSales() {
+//        return sales;
+//    }
+//
+//    public void setSales(Set<Sale> sales) {
+//        this.sales = sales;
+//    }
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setSales(Set<Sale> sales) {
-        this.sales = sales;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

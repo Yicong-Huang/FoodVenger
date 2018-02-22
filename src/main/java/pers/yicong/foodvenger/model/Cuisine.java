@@ -2,17 +2,16 @@ package pers.yicong.foodvenger.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "cuisine")
+@Table(name = "cuisines")
 public class Cuisine {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "type")
     @NotEmpty(message = "*Please provide cuisine type")
@@ -39,11 +38,11 @@ public class Cuisine {
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

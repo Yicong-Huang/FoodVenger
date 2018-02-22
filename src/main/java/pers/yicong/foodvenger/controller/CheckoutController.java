@@ -12,6 +12,8 @@ import pers.yicong.foodvenger.service.CheckoutService;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class CheckoutController {
@@ -29,18 +31,22 @@ public class CheckoutController {
 
         Cart cart = ((Cart) httpSession.getAttribute("cart"));
         Customer customer = ((Customer) httpSession.getAttribute("customer"));
-
+        Set<Sale> sales = new HashSet<>();
 
         for (Dish dish : cart.getDishes()) {
             Sale sale = new Sale();
-            sale.setCustomer(customer);
+//            sale.setCustomer(customer);
+            sale.setCid(customer.getId());
+//            sale.setDish(dish);
             sale.setDid(dish.getId());
+            sale.setNum(dish.getNum());
             sale.setSaleDate(new Date());
-            checkoutService.save(sale);
+            sales.add(checkoutService.save(sale));
         }
+        ModelAndView modelAndView = new ModelAndView("confirmation");
+        modelAndView.addObject("sales", sales);
 
-
-        return new ModelAndView("confirmation");
+        return modelAndView;
     }
 
 }

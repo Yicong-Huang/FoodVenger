@@ -13,7 +13,7 @@ public class DishServiceImpl implements DishService {
     DishRepository dishRepository;
 
     @Override
-    public Dish getDish(String id) {
+    public Dish getDish(Integer id) {
         return dishRepository.findOne(id);
     }
 

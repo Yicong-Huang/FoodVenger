@@ -10,7 +10,7 @@ public class Rating {
 
     @Id
     @Column(name = "rid")
-    private String rid;
+    private Integer rid;
 
     @Column(name = "rating")
     @NotEmpty
@@ -18,7 +18,7 @@ public class Rating {
 
     @Column(name = "num_votes")
     @NotEmpty
-    private int numVotes;
+    private Integer numVotes;
 
 
     @OneToOne(mappedBy = "rating")
@@ -33,11 +33,11 @@ public class Rating {
         this.restaurant = restaurant;
     }
 
-    public String getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(String rid) {
+    public void setRid(Integer rid) {
         this.rid = rid;
     }
 
@@ -49,11 +49,11 @@ public class Rating {
         this.rating = rating;
     }
 
-    public int getNumVotes() {
+    public Integer getNumVotes() {
         return numVotes;
     }
 
-    public void setNumVotes(int numVotes) {
+    public void setNumVotes(Integer numVotes) {
         this.numVotes = numVotes;
     }
 }

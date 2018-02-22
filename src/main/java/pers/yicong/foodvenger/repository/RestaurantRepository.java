@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Repository("restaurantRepository")
-public interface RestaurantRepository extends JpaRepository<Restaurant, String>, PagingAndSortingRepository<Restaurant, String> {
+public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>, PagingAndSortingRepository<Restaurant, Integer> {
     Set<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);
 
 

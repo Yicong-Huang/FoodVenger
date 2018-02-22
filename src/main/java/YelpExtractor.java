@@ -9,8 +9,8 @@ public class YelpExtractor {
         try {
 
             HttpURLConnection con;
-            for (int i = 0; i < 20;i++){
-                url = new URL("https://api.yelp.com/v3/businesses/search?term=restaurants&location=USA&limit=50&offset="+i*50);
+            for (int i = 0; i < 20; i++) {
+                url = new URL("https://api.yelp.com/v3/businesses/search?term=restaurants&location=USA&limit=50&offset=" + i * 50);
 
                 con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
@@ -22,7 +22,7 @@ public class YelpExtractor {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()));
                 String inputLine;
-                BufferedWriter writer = new BufferedWriter(new FileWriter("data/page" + i+ ".txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("data/page" + i + ".txt"));
 
                 while ((inputLine = in.readLine()) != null) {
                     writer.write(inputLine);
@@ -32,8 +32,6 @@ public class YelpExtractor {
                 con.disconnect();
 
             }
-
-
 
 
         } catch (IOException e) {

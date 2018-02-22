@@ -12,7 +12,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     SaleRepository saleRepository;
 
     @Override
-    public void save(Sale sale) {
-        saleRepository.save(sale);
+    public Sale save(Sale sale) {
+        return saleRepository.save(sale);
     }
 }

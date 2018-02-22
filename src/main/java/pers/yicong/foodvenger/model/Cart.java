@@ -34,7 +34,7 @@ public class Cart {
 
     }
 
-    public int size() {
+    public Integer size() {
         return dishes.size();
     }
 

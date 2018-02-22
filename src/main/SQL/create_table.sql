@@ -3,19 +3,17 @@ CREATE SCHEMA restdb;
 USE restdb;
 
 
-
 CREATE TABLE IF NOT EXISTS restaurants
 (
-  id   VARCHAR(10)  NOT NULL
+  id    VARCHAR(10)  NOT NULL
     PRIMARY KEY,
-  name VARCHAR(50)  NOT NULL,
-  addr VARCHAR(100) NOT NULL,
+  name  VARCHAR(50)  NOT NULL,
+  addr  VARCHAR(100) NOT NULL,
   image VARCHAR(200) NOT NULL,
   CONSTRAINT restaurants_id_uindex
   UNIQUE (id)
 )
   ENGINE = InnoDB;
-
 
 
 CREATE TABLE IF NOT EXISTS dishes
@@ -40,12 +38,11 @@ CREATE TABLE IF NOT EXISTS dishes_in_restau
 )
   ENGINE = InnoDB;
 
-CREATE INDEX   dishes_in_restau_dishes_did_fk
+CREATE INDEX dishes_in_restau_dishes_did_fk
   ON dishes_in_restau (did);
 
 CREATE INDEX dishes_in_restau_restaurants_rid_fk
   ON dishes_in_restau (rid);
-
 
 
 CREATE TABLE IF NOT EXISTS creditcards

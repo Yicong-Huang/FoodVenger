@@ -27,12 +27,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void saveUser(Customer user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
+    public void saveCustomer(Customer customer) {
+        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+        customer.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepository.save(user);
+        customer.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        customer.setCcId(1);
+//		customer.setSales(new HashSet<>());
+        customer.setAddress("");
+        userRepository.save(customer);
 	}
 
 }

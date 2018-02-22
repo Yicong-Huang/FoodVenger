@@ -23,7 +23,7 @@ public class RestaurantController {
 
 
     @RequestMapping("/restaurant")
-    public ModelAndView restaurant(@RequestParam String id) {
+    public ModelAndView restaurant(@RequestParam Integer id) {
         ModelAndView modelAndView = new ModelAndView("restaurant");
         modelAndView.addObject("rest", restaurantService.getRestaurant(id));
         return modelAndView;
@@ -32,7 +32,7 @@ public class RestaurantController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public void add(@RequestParam("did") String did, HttpSession httpSession) {
+    public void add(@RequestParam("did") Integer did, HttpSession httpSession) {
 
         Cart cart;
 
@@ -50,7 +50,7 @@ public class RestaurantController {
 
     @RequestMapping("/del")
     @ResponseBody
-    public void del(@RequestParam("did") String did, HttpSession httpSession) {
+    public void del(@RequestParam("did") Integer did, HttpSession httpSession) {
 
         Cart cart = ((Cart) httpSession.getAttribute("cart"));
         cart.delDish(dishService.getDish(did));

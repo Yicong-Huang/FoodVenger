@@ -6,6 +6,6 @@ import pers.yicong.foodvenger.model.CreditCard;
 
 
 @Repository("creditCardRepository")
-public interface CreditCardRepository extends CrudRepository<CreditCard, String> {
+public interface CreditCardRepository extends CrudRepository<CreditCard, Integer> {
 
 }

@@ -31,27 +31,27 @@ public class LoginController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
-        Customer user = new Customer();
-        modelAndView.addObject("user", user);
+        Customer customer = new Customer();
+        modelAndView.addObject("customer", customer);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid Customer user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid Customer customer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        Customer userExists = userService.findUserByEmail(user.getEmail());
+        Customer userExists = userService.findUserByEmail(customer.getEmail());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                    .rejectValue("email", "error.customer",
+                            "There is already a customer registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
-            userService.saveUser(user);
+            userService.saveCustomer(customer);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new Customer());
+            modelAndView.addObject("customer", new Customer());
             modelAndView.setViewName("registration");
 
         }

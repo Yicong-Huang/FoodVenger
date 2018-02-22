@@ -12,7 +12,7 @@ public class Restaurant {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Column(name = "name")
     @NotEmpty(message = "*Please provide restaurant name")
     private String name;
@@ -81,11 +81,11 @@ public class Restaurant {
         this.dishes = dishes;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
