@@ -13,4 +13,6 @@ public interface CuisineRepository extends CrudRepository<Cuisine, Integer> {
     List<Cuisine> findAllByTypeContains(String pattern);
 
     Iterable<Cuisine> findAllByType(String type);
+
+    Cuisine findByType(String type);
 }

@@ -9,7 +9,7 @@ public class YelpExtractor {
         try {
 
             HttpURLConnection con;
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 3; i++) {
                 url = new URL("https://api.yelp.com/v3/businesses/search?term=restaurants&location=USA&limit=50&offset=" + i * 50);
 
                 con = (HttpURLConnection) url.openConnection();

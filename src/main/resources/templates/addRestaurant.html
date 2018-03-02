@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+</form>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form autocomplete="off" th:action="@{/admin/add/restaurant}"
+                  th:object="${restaurant}" method="post" class="form-horizontal"
+                  role="form">
+                <h2>Add Restaurant</h2>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                               class="validation-message"></label>
+                        <input type="text" th:field="*{name}" placeholder="Restaurant Name"
+                               class="form-control"/>
+                    </div>
+                </div>
+                <div align="center" th:if="${error}">
+                    <p style="font-size: 20; color: #FF1C19;">Duplicate Restaurant!</p>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{addr}" placeholder="Address"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('addr')}" th:errors="*{addr}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{aRating}" placeholder="Rate"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('aRating')}" th:errors="*{aRating}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{aDish}" placeholder="Dish"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('aDish')}" th:errors="*{aDish}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{aCuisine}" placeholder="Cuisine"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('aCuisine')}" th:errors="*{aCuisine}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div align="center" th:if="${success}">
+                    <p style="font-size: 20; color: #FF1C19;">Restaurant added successfully!</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary btn-block">Add Restaurant</button>
+                    </div>
+                </div>
+                <span th:utext="${successMessage}"></span>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+1. As I am using the DOM parsing, it is slow because it has to read the entire document into memory, and then parse the
+data in to a Spring Data instance. We could separate the process into several smaller documents object, thus the memory
+could be freed before the next part of the document is read in.
+
+2. Current method is checking if a duplicate is in the database, by manually select the record. this is slow since it
+gonna have to search the entire database for each entry. Thus a better solution would be insert the new data into a hash
+map, and then map the database while insert record one by one. this saves a lot time if initially importing a huge data
+into a small database. So we check on the backend for the duplication before using SQL, which is slower to check.

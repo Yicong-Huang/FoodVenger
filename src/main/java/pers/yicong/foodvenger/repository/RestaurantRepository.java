@@ -13,5 +13,10 @@ import java.util.Set;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>, PagingAndSortingRepository<Restaurant, Integer> {
     Set<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);
 
+    Restaurant findByName(String name);
 
+    Restaurant findByNameEquals(String name);
+
+
+    Restaurant findByIdEquals(int i);
 }

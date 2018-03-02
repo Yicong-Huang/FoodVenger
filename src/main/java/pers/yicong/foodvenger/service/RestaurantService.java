@@ -6,4 +6,8 @@ public interface RestaurantService {
 
 
     Restaurant getRestaurant(Integer id);
+
+    int save(Restaurant restaurant);
+
+    long count();
 }

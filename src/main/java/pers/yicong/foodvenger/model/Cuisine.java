@@ -10,6 +10,7 @@ import java.util.Set;
 public class Cuisine {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
 
@@ -20,6 +21,18 @@ public class Cuisine {
     @ManyToMany(mappedBy = "cuisines")
     private Set<Restaurant> restaurants;
 
+    public Cuisine(String type) {
+        this.type = type;
+
+    }
+
+    public Cuisine() {
+    }
+
+    public Cuisine(String type, Set<Restaurant> restaurants) {
+        this.type = type;
+        this.restaurants = restaurants;
+    }
 
     public Set<Restaurant> getRestaurants() {
         return restaurants;

@@ -17,6 +17,7 @@ import javax.validation.Valid;
 @Controller
 public class LoginController {
 
+
     @Autowired
     private UserService userService;
 
@@ -68,10 +69,28 @@ public class LoginController {
         httpSession.setAttribute("userEmail", customer.getEmail());
 
         modelAndView.addObject("userName", "Welcome " + customer.getName() + " " + customer.getLastName() + " (" + customer.getEmail() + ")");
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+//        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("index");
         return modelAndView;
     }
+
+
+    @RequestMapping(value = {"/admin/hello"}, method = RequestMethod.GET)
+
+    public ModelAndView loginAdmin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/user/hello"}, method = RequestMethod.GET)
+
+    public ModelAndView loginUser() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userhello");
+        return modelAndView;
+    }
+
 
 //    @RequestMapping(value = "/error")
 //    public ModelAndView error() {

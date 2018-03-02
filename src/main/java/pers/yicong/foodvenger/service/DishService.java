@@ -7,4 +7,8 @@ public interface DishService {
 
 
     Dish getDish(Integer id);
+
+    int save(Dish dish);
+
+    Long count();
 }

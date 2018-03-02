@@ -1,7 +1,5 @@
 package pers.yicong.foodvenger.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,17 +11,23 @@ public class Rating {
     private Integer rid;
 
     @Column(name = "rating")
-    @NotEmpty
     private float rating;
 
     @Column(name = "num_votes")
-    @NotEmpty
     private Integer numVotes;
 
 
     @OneToOne(mappedBy = "rating")
     private Restaurant restaurant;
 
+    public Rating(Integer rid, float rating, Integer numVotes) {
+        this.rid = rid;
+        this.rating = rating;
+        this.numVotes = numVotes;
+    }
+
+    public Rating() {
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;

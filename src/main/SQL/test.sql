@@ -56,7 +56,7 @@ CREATE TABLE customers
 
 CREATE TABLE dishes
 (
-  id    INT               NOT NULL
+  id    INT               NOT NULL  AUTO_INCREMENT
     PRIMARY KEY,
   name  VARCHAR(100)      NOT NULL,
   cid   INT               NOT NULL,
@@ -97,7 +97,7 @@ CREATE INDEX ratings_restuarants_rid_fk
 
 CREATE TABLE restaurants
 (
-  id    INT          NOT NULL
+  id    INT          NOT NULL  AUTO_INCREMENT
     PRIMARY KEY,
   name  VARCHAR(50)  NOT NULL,
   addr  VARCHAR(100) NOT NULL,
