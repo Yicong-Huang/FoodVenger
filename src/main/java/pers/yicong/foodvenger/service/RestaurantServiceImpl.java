@@ -30,6 +30,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
+    public Set<Restaurant> findByFullText(String searchTerm) {
+        return restaurantRepository.findByFullText(searchTerm);
+    }
+
+    @Override
     public Restaurant getRestaurant(Integer id) {
         return restaurantRepository.findOne(id);
     }

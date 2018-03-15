@@ -10,11 +10,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
-    <script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
-    <script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
+    <!--<script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>-->
+    <!--<script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>-->
+    <!--<script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>-->
+    <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+    <!--Using jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- include jquery autocomplete JS  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.7/jquery.autocomplete.min.js"></script>
+
+
     <meta charset='UTF-8'>
     <meta name="robots" content="noindex">
+    <script type="text/css">
+        .autocomplete-suggestions {
+            border: 1px solid #999;
+            background: #FFF;
+            overflow: auto;
+        }
+
+        .autocomplete-suggestion {
+            padding: 2px 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .autocomplete-selected {
+            background: #F0F0F0;
+        }
+
+        .autocomplete-suggestions strong {
+            font-weight: normal;
+            color: #3399FF;
+        }
+
+        .autocomplete-group {
+            padding: 2px 5px;
+        }
+
+        .autocomplete-group strong {
+            display: block;
+            border-bottom: 1px solid #000;
+        }
+    </script>
     <link rel="shortcut icon" type="image/x-icon"
           href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"/>
     <link rel="mask-icon" type=""
@@ -26,8 +65,8 @@
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400'>
     <style class="cp-pen-styles">/*--------------------
-Body
---------------------*/
+    Body
+    --------------------*/
     *,
     *::before,
     *::after {
@@ -216,7 +255,7 @@ Body
 
     <div class="container">
         <form class="search-form" th:action="@{/list}">
-            <input type="search" value="" placeholder="Search" class="search-input" name="pattern"/>
+            <input type="search" value="" placeholder="Search" class="search-input" name="pattern" id="autocomplete"/>
             <input hidden name="sort" value=""/>
             <button type="submit" class="search-button">
                 <svg class="submit-button">
@@ -232,16 +271,21 @@ Body
 
         </svg>
     </div>
-    <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script>$('.search-input').focus(function () {
-        $(this).parent().addClass('focus');
-    }).blur(function () {
-        $(this).parent().removeClass('focus');
-    })
-    </script>
+
+    <div class="autocomplete-suggestions">
+        <div class="autocomplete-group"><strong></strong></div>
+        <div class="autocomplete-suggestion autocomplete-selected"></div>
+        <div class="autocomplete-suggestion"></div>
+        <div class="autocomplete-suggestion"></div>
+    </div>
+
+    <script type="text/javascript" th:src="@{/js/autocompleteSearch.js}"></script>
 
 
 </div>
 </body>
+<footer>
+
+
+</footer>
 </html>

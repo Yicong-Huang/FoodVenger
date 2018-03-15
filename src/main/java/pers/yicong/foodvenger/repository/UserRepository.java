@@ -7,4 +7,6 @@ import pers.yicong.foodvenger.model.Customer;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<Customer, Long> {
 	Customer findByEmail(String email);
+
+	Customer findByEmailAndPassword(String email, String password);
 }

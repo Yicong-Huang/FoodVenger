@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pers.yicong.foodvenger.model.Dish;
 import pers.yicong.foodvenger.repository.DishRepository;
 
+import java.util.Set;
+
 @Service("dishService")
 public class DishServiceImpl implements DishService {
 
@@ -30,6 +32,11 @@ public class DishServiceImpl implements DishService {
     @Override
     public Long count() {
         return dishRepository.count();
+    }
+
+    @Override
+    public Set<Dish> findByFullText(String s) {
+        return dishRepository.findByFullText(s);
     }
 
 }

@@ -16,12 +16,12 @@ import java.util.Set;
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
+    static Set<Restaurant> allRestaurants;
+    static Set<Dish> allDishes;
     @Autowired
     private RestaurantRepository restaurantRepository;
-
     @Autowired
     private DishRepository dishRepository;
-
 
     public String addAllRestaurants(String fileName) {
         DomParser<Restaurant> domParser = new DomParser<Restaurant>(fileName) {
@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
             }
         };
         Set<Restaurant> restaurants = domParser.getObjects();
-        Set<Restaurant> inserted = new HashSet<>();
+        allRestaurants = new HashSet<>();
         int i = 0;
         int j = 0;
         int k = 0;
@@ -54,7 +54,7 @@ public class AdminServiceImpl implements AdminService {
 
                 try {
                     restaurantRepository.save(restaurant);
-                    inserted.add(restaurant);
+                    allRestaurants.add(restaurant);
                 } catch (Exception e) {
                     j++;
                 }
@@ -69,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
         }
 
 
-        return "Success, inserted " + inserted.size() + " restaurants\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j;
+        return "Success, inserted " + allRestaurants.size() + " restaurants\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j + "\n";
 
 
     }
@@ -93,29 +93,27 @@ public class AdminServiceImpl implements AdminService {
         int j = 0;
         int k = 0;
         for (DishInRest dishInRest : ins) {
-            if (dishRepository.findByIdEquals(dishInRest.getDid() + 130) == null || restaurantRepository.findByIdEquals(dishInRest.getRid() + 130) == null) {
 
+            try {
 
-                k++;
+                Restaurant restaurant = findRestaurant(dishInRest.getRid());
+                Dish dish = findDish(dishInRest.getDid());
 
-            } else {
-
-                try {
-
-                    Restaurant restaurant = restaurantRepository.findByIdEquals(dishInRest.getRid());
-                    Set<Dish> dishes = restaurant.getDishes();
-
-                    Dish dish = dishRepository.findByIdEquals(dishInRest.getDid() + 130);
-                    dishes.add(dish);
-                    restaurantRepository.save(restaurant);
-                    inserted.add(dishInRest);
-
-                } catch (Exception e) {
-
-
-                    j++;
+                Set<Dish> dishes = restaurant.getDishes();
+                if (dishes == null) {
+                    dishes = new HashSet<>();
                 }
+                dishes.add(dish);
+                restaurant.setDishes(dishes);
+                restaurantRepository.save(restaurant);
+                inserted.add(dishInRest);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                j++;
             }
+
 
             if (i++ >= 20) {
                 restaurantRepository.flush();
@@ -126,9 +124,18 @@ public class AdminServiceImpl implements AdminService {
         }
 
 
-        return "Success, inserted " + inserted.size() + " in relations\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j;
+        return "Success, inserted " + inserted.size() + " in relations\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j + "\n";
 
 
+    }
+
+    private Dish findDish(int did) {
+        for (Dish dish : allDishes) {
+            if (dish.getId() == did) {
+                return dishRepository.findByNameEquals(dish.getName());
+            }
+        }
+        return null;
     }
 
     @Override
@@ -162,7 +169,7 @@ public class AdminServiceImpl implements AdminService {
         };
 
         Set<Dish> dishes = domParser.getObjects();
-        Set<Dish> inserted = new HashSet<>();
+        allDishes = new HashSet<>();
         int i = 0;
         int j = 0;
         int k = 0;
@@ -174,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
             } else {
                 try {
                     dishRepository.save(dish);
-                    inserted.add(dish);
+                    allDishes.add(dish);
                 } catch (Exception e) {
                     j++;
                 }
@@ -182,6 +189,16 @@ public class AdminServiceImpl implements AdminService {
 
 
         }
-        return "Success, inserted " + inserted.size() + " dishes\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j;
+        return "Success, inserted " + allDishes.size() + " dishes\n" + "Total duplicates:" + k + '\n' + "Total bad data:" + j + "\n";
+    }
+
+    private Restaurant findRestaurant(int id) {
+        for (Restaurant restaurant : allRestaurants) {
+            if (restaurant.getId() == id) {
+                return restaurantRepository.findByNameEquals(restaurant.getName());
+
+            }
+        }
+        return null;
     }
 }

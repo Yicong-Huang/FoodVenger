@@ -9,11 +9,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import pers.yicong.foodvenger.filter.CaptchaVerifierFilter;
 
 import javax.sql.DataSource;
+
+//import pers.yicong.foodvenger.filter.CaptchaVerifierFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -31,13 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
-    @Autowired
-    private CaptchaVerifierFilter filter;
+//    @Autowired
+//    private CaptchaVerifierFilter filter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.
+
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
@@ -49,16 +50,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        filter.setPrivateKey("6LcR90cUAAAAAEGpt_Q3GUffwlOzfyoInFNyzk69");
+//        filter.setPrivateKey("6LcR90cUAAAAAEGpt_Q3GUffwlOzfyoInFNyzk69");
 
 
         http
-                .addFilterBefore(filter, BasicAuthenticationFilter.class)
+//                .addFilterAfter(filter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/android/**").permitAll()
 
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest()

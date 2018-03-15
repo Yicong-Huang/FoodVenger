@@ -130,4 +130,15 @@ public class AdminController {
         return modelAndView;
     }
 
+    @RequestMapping("/admin/addAllData")
+    public ModelAndView addAllData() {
+
+        ModelAndView modelAndView = new ModelAndView("feedback");
+        String msg = adminService.addAllRestaurants("data/csv/restaurants.xml");
+        msg += adminService.addAllDishes("data/csv/dishes.xml");
+        msg += adminService.addAllDishInRest("data/csv/dishes_in_restau.xml");
+        modelAndView.addObject("msg", msg);
+        return modelAndView;
+    }
+
 }
