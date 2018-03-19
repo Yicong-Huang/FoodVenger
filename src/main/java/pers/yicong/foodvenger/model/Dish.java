@@ -1,5 +1,6 @@
 package pers.yicong.foodvenger.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,6 +30,7 @@ public class Dish {
 
 
     @ManyToMany(mappedBy = "dishes")
+    @JsonIgnore
     private Set<Restaurant> restaurants;
 
 //    @OneToMany(cascade = CascadeType.ALL,
@@ -55,6 +57,7 @@ public class Dish {
         this.num = num;
     }
 
+    @JsonIgnore
     public Set<Restaurant> getRestaurants() {
         return restaurants;
     }

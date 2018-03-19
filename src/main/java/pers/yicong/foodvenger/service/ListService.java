@@ -6,7 +6,11 @@ import pers.yicong.foodvenger.model.Cuisine;
 import pers.yicong.foodvenger.model.Dish;
 import pers.yicong.foodvenger.model.Restaurant;
 
+import java.util.Set;
+
 public interface ListService {
+    Set<Restaurant> findRestaurantsByNameWithOffset(String pattern, int offset);
+
     Iterable<Restaurant> findAllRestaurants();
 
 

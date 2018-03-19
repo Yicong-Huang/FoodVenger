@@ -1,5 +1,7 @@
 package pers.yicong.foodvenger.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Rating {
 
 
     @OneToOne(mappedBy = "rating")
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Rating(Integer rid, float rating, Integer numVotes) {
@@ -29,6 +32,7 @@ public class Rating {
     public Rating() {
     }
 
+    @JsonIgnore
     public Restaurant getRestaurant() {
         return restaurant;
     }

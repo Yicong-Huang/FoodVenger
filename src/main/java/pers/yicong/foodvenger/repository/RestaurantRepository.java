@@ -13,8 +13,13 @@ import java.util.Set;
 
 @Repository("restaurantRepository")
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>, PagingAndSortingRepository<Restaurant, Integer> {
-    @Query(value = "SELECT * FROM restaurants WHERE MATCH (name) AGAINST (:searchTerm IN BOOLEAN MODE)", nativeQuery = true)
+    @Query(value = "SELECT * FROM restaurants WHERE MATCH (name) AGAINST (:searchTerm IN BOOLEAN MODE) ", nativeQuery = true)
     Set<Restaurant> findByFullText(@Param("searchTerm") String searchTerm);
+
+    @Query(value = "SELECT * FROM restaurants where name like :pattern  Limit 2 offset :offset", nativeQuery = true)
+    Set<Restaurant> findRestaurantsByNameWithOffset(@Param("pattern") String pattern, @Param("offset") int offset);
+
+
 
 
     Set<Restaurant> findAllByAddrContainsOrNameContains(String name, String addr);

@@ -31,6 +31,11 @@ public class ListServiceImpl implements ListService {
 
 
     @Override
+    public Set<Restaurant> findRestaurantsByNameWithOffset(String pattern, int offset) {
+        return restaurantRepository.findRestaurantsByNameWithOffset("%" + pattern + "%", offset);
+    }
+
+    @Override
     public Iterable<Restaurant> findAllRestaurants() {
         return restaurantRepository.findAll();
     }
