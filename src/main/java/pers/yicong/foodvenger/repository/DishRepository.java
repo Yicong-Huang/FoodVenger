@@ -14,16 +14,19 @@ import java.util.Set;
 
 @Repository("dishRepository")
 public interface DishRepository extends CrudRepository<Dish, Integer> {
+
+
+    @Query(value = "SELECT * FROM dishes WHERE MATCH (name) AGAINST (:searchTerm IN BOOLEAN MODE)", nativeQuery = true)
+    Set<Dish> findByFullText(@Param("searchTerm") String searchTerm);
+
+
+
     List<Dish> findAllByNameContains(String pattern);
 
 
     Dish findByNameEquals(String name);
 
     Dish findByIdEquals(Integer did);
-
-    @Query(value = "SELECT * FROM dishes WHERE MATCH (name) AGAINST (:searchTerm IN BOOLEAN MODE)", nativeQuery = true)
-    Set<Dish> findByFullText(@Param("searchTerm") String searchTerm);
-
 
 
 //    void save(DishInRest dishInRest);

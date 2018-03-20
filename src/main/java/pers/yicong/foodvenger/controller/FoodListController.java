@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pers.yicong.foodvenger.service.ListService;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 @Controller
 public class FoodListController {
 
@@ -24,6 +28,9 @@ public class FoodListController {
 
     @RequestMapping("/list")
     ModelAndView list(Pageable pageable, @RequestParam String pattern, @RequestParam String sort) {
+
+
+        long startTime = System.nanoTime();
         ModelAndView modelAndView = new ModelAndView("list");
         if (sort.equals("rating")) {
             modelAndView.addObject("page", listService.listAllByPageWithRating(pageable, pattern));
@@ -35,6 +42,16 @@ public class FoodListController {
         }
 
         modelAndView.addObject("pattern", pattern);
+
+
+        try {
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("time.log", true));
+            writer.append(String.valueOf(System.nanoTime() - startTime));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         return modelAndView;

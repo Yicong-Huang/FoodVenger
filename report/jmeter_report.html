@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: linen;
+        }
+
+        td {
+            border-top-style: solid;
+        }
+    </style>
+</head>
+<body>
+
+<table style="width:100%">
+    <tr style="font-weight:bold; background-color: orange">
+        <td width="300px">Single-instance version cases</td>
+        <td>Graph Results Screenshot</td>
+        <td>Average Query Time(ms)</td>
+        <td>Average Search Servlet Time(ms)</td>
+        <td>Average JDBC Time(ms)</td>
+        <td>Analysis</td>
+    </tr>
+    <tr>
+        <td>Case 1: HTTP/1 thread</td>
+        <td><img src="graph_results_case1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;">
+        </td>
+        <td>??</td>
+        <td>590.675</td>
+        <td>483.793</td>
+        <td>Since Hibernate uses hql and Jpa, it takes a lot time on JDBC side.</td>
+    </tr>
+    <tr>
+        <td>Case 2: HTTP/10 threads</td>
+        <td><img src="graph_results_case2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;">
+        </td>
+        <td>??</td>
+        <td>727.055</td>
+        <td>576.781</td>
+        <td>because thread becomes more, query time is longer, database needs time to excute each thread</td>
+    </tr>
+    <tr>
+        <td>Case 3: HTTPS/10 threads</td>
+        <td><img src="graph_results_case3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;">
+        </td>
+        <td>??</td>
+        <td>??</td>
+        <td>??</td>
+        <td>because https has more security check, and one more redirection each time</td>
+    </tr>
+    <tr>
+        <td>Case 4: HTTP/10 threads/No prepared statements</td>
+        <td><img src="graph_results_case4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;">
+        </td>
+        <td>??</td>
+        <td>724.673</td>
+        <td>574.016</td>
+        <td>--</td>
+    </tr>
+    <tr>
+        <td>Case 5: HTTP/10 threads/No connection pooling</td>
+        <td><img src="graph_results_case5.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;">
+        </td>
+        <td>??</td>
+        <td>??</td>
+        <td>??</td>
+        <td>--</td>
+    </tr>
+
+</table>
+
+
+<table style="width:100%">
+    <tr style="font-weight:bold; background-color: orange">
+        <td width="300px">Scaled version cases</td>
+        <td>Graph Results Screenshot</td>
+        <td>Average Query Time(ms)</td>
+        <td>Average Search Servlet Time(ms)</td>
+        <td>Average JDBC Time(ms)</td>
+        <td>Analysis</td>
+    </tr>
+    <tr>
+        <td>Case 1: HTTP/1 thread</td>
+        <td><img src="graph_results_scale_case1.png" alt="Graph Results Screenshot Case 1"
+                 style="width:304px;height:228px;"></td>
+        <td>??</td>
+        <td>499.093</td>
+        <td>417.721</td>
+        <td>This is faster than case 1 because there are two instance handling requests.</td>
+    </tr>
+    <tr>
+        <td>Case 2: HTTP/10 threads</td>
+        <td><img src="graph_results_scale_case2.png" alt="Graph Results Screenshot Case 2"
+                 style="width:304px;height:228px;"></td>
+        <td>??</td>
+        <td>849.318</td>
+        <td>700.166</td>
+        <td>because thread becomes more, query time is longer, database needs time to excute each thread</td>
+    </tr>
+    <tr>
+        <td>Case 3: HTTP/10 threads/No prepared statements</td>
+        <td><img src="graph_results_scale_case3.png" alt="Graph Results Screenshot Case 3"
+                 style="width:304px;height:228px;"></td>
+        <td>??</td>
+        <td>880.320</td>
+        <td>700.741</td>
+        <td>Without prepared statements, the query has to construct each time, thus query time is similar but TS is
+            bigger
+        </td>
+    </tr>
+    <tr>
+        <td>Case 4: HTTP/10 threads/No connection pooling</td>
+        <td><img src="graph_results_scale_case4.png" alt="Graph Results Screenshot Case 4"
+                 style="width:304px;height:228px;"></td>
+        <td>??</td>
+        <td>932.023</td>
+        <td>7502.052</td>
+        <td>each query a new connection is made, thus it take more time</td>
+    </tr>
+
+</table>
+
+</body>
+</html>

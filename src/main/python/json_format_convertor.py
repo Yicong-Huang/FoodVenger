@@ -4,6 +4,8 @@ import urllib.request
 
 index = 0
 restaurants = open('../../../data/csv/restaurants.csv', 'w')
+
+renames = open('../../../data/csv/rename.csv', 'w')
 restaurants.write('"name","image","addr"\n')
 
 cuisines = open('../../../data/csv/cuisines.csv', 'w')
@@ -32,6 +34,8 @@ for i in range(20):
             print([b['name'], b['image_url'],
                    "\"" + ', '.join(b['location']["display_address"]) + "\"" + '\n'])
             index += 1
+            renames.write(b['name'] + '\n')
+
             restaurants.write(
                 ','.join([str(index), b['name'], b['image_url'],
                           "\"" + ', '.join(b['location']["display_address"]) + "\"" + '\n']))
